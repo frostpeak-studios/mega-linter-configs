@@ -23,6 +23,10 @@ CONFIG_PROPERTIES_TO_APPEND:
   - PRE_COMMANDS
   - POST_COMMANDS
 
+# Run all lint modes by default.
+# See: https://megalinter.io/8.8.0/config-cli-lint-mode/
+# SKIP_CLI_LINT_MODES: []
+
 # Enable to force-pass checks. Can be useful if something upstream breaks, and we have to wait for a fix.
 DISABLE_ERRORS: false
 
@@ -49,7 +53,3 @@ SHOW_ELAPSED_TIME: true
 
 # Not necessary, but doesn't hurt to log.
 SHOW_SKIPPED_LINTERS: true
-
-# Run all lint modes by default.
-# See: https://megalinter.io/8.8.0/config-cli-lint-mode/
-# SKIP_CLI_LINT_MODES: []

@@ -8,10 +8,10 @@ Shared repo containing various configs for use with [MegaLinter](https://megalin
 - [Flavors](#flavors)
 - [Components](#components)
 - [Notes](#notes)
-  - [Linter Configs](#linter-configs)
-  - [Design Decisions](#design-decisions)
-    - [No auto fixes](#no-auto-fixes)
-    - [Config file naming and formats](#config-file-naming-and-formats)
+    - [Linter Configs](#linter-configs)
+    - [Design Decisions](#design-decisions)
+        - [No auto fixes](#no-auto-fixes)
+        - [Config file naming and formats](#config-file-naming-and-formats)
 
 ## Getting Started
 

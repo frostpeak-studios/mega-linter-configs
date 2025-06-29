@@ -1,0 +1,51 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     linter.yml - MegaLinter GitHub Action workflow
+#     Docs:
+#     https://megalinter.io/latest/install-github/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+name: Linter
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+    branches: [main, develop]
+
+# Set any build permissions to `read-all` unless explicitly overridden. Important, as
+# GitHub defaults to `write-all` which is a security risk.
+# This satisfies the Checkov CKV2_GHA_1 error.
+permissions: read-all
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  mega-linter:
+    name: MegaLinter
+    runs-on: ubuntu-latest
+    permissions:
+      # Allow the job to write PR comments, etc.
+      pull-requests: write
+      statuses: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances.
+          fetch-depth: 0
+
+      - name: MegaLinter
+        id: ml
+        # The dotnet flavor image is about half the size of the standard image and removes the majority of
+        # irrelevant scanners that we won't be using.
+        uses: oxsecurity/megalinter/flavors/documentation@v8.8.0
+        env:
+          MEGALINTER_CONFIG: ".mega-linter.yml"
+          # Validates all sources when push on main, else just the git diff with main. Override with true if you always
+          # want to lint all sources.
+          VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

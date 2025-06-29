@@ -1,20 +1,10 @@
 ---
 #  ╭──────────────────────────────────────────────────────────────────────────────╮
-#     logging.yml - Logging settings for MegaLinter
+#     .mega-linter.yml - Configuration for MegaLinter
 #     Docs:
-#     https://megalinter.io/latest/config-variables/
+#     https://megalinter.io/latest/config-file/
 #  ╰──────────────────────────────────────────────────────────────────────────────╯
 
-LOG_LEVEL: INFO
+EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/base.yml
 
-# Only written to if TEXT_REPORTER is set to true.
-LOG_FILE: mega-linter.log
-
-# Cool, but noisy.
-PRINT_ALPACA: false
-
-# Ensure this is added to .gitignore.
-# REPORT_OUTPUT_FOLDER: ${GITHUB_WORKSPACE}/megalinter-reports
-
-# Useful for debugging filtering issues, but noisy.
-PRINT_ALL_FILES: false
+LINTER_RULES_PATH: .config/linters/resources
