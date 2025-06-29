@@ -1,0 +1,8 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     documentation.yml - Configuration for documentation flavor of MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/flavors/documentation/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/base.yml

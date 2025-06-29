@@ -1,0 +1,23 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     performance.yml - Performance settings for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/configuration/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# MegaLinter groups the same language / format linters on the same process to avoid locking
+# issues if applying fixes. If that doesn't work as intended, disable this.
+# Will significantly degrade performance.
+PARALLEL: true
+
+# Can be turned on in private repos to improve performance, but will output
+# any secrets found in plain text to the console/log.
+SKIP_LINTER_OUTPUT_SANITIZATION: false
+
+# Should be set to false after the codebase has been scanned and all issues fixed.
+# This will switch to only scanning new/changed files and can dramatically improve performance.
+VALIDATE_ALL_CODEBASE: true
+
+# When left unset will use all available cores.
+# Leave commented out unless you need to restrict the resources available to the runner.
+#PARALLEL_PROCESS_NUMBER: 4

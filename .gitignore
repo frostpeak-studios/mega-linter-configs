@@ -1,0 +1,78 @@
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     .gitignore
+#     Docs: https://git-scm.com/docs/gitignore
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# ── OS-level Ignores ────────────────────────────────────────────────────────
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.cache/
+Trash-*
+
+# ── IDE: JetBrains Rider, ReSharper ───────────────────────────────────────────
+
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+*.DotSettings.user
+*.sln.DotSettings.user
+resharper-host/
+.ReSharper*/
+
+# ── IDE: Visual Studio ────────────────────────────────────────────────────────
+
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# Database
+*.mdf
+*.ldf
+
+# Publish Profiles (individual profiles only)
+Properties/PublishProfiles/*.pubxml.user
+
+# ── IDE: Visual Studio Code ───────────────────────────────────────────────────
+
+.vscode/*
+.history/
+*.code-workspace
+
+# Include VS Code shared settings
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# ── CI/CD Pipelines ───────────────────────────────────────────────────────────
+
+# Ignore build output from custom actions
+.github/actions/**/node_modules/
+.github/actions/**/dist/
+
+# GitHub CLI
+.gh/
+
+# MegaLinter output
+megalinter-reports/
+.cspellcache
+.lycheecache

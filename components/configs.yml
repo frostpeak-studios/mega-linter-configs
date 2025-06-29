@@ -1,0 +1,42 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     configs.yml - Linter configuration files for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/supported-linters/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# Set the base path in the config repo.
+LINTER_RULES_PATH: https://raw.githubusercontent.com/frostpeak-studios/linter-configs/refs/heads/main/resources
+
+# Explicitly define config file paths. The linter would otherwise detect some of these
+# properly, but others use a different naming convention or file format than the default.
+# We set them all to avoid having to figure out which category each of these falls into.
+
+ACTION_ACTIONLINT_CONFIG_FILE: ".actionlint.yml"
+API_SPECTRAL_CONFIG_FILE: ".spectral.yml"
+COPYPASTE_JSCPD_CONFIG_FILE: ".jscpd.json"
+CPP_CLANG_FORMAT_CONFIG_FILE: ".clang-format"
+CSHARP_CSHARPIER_CONFIG_FILE: ".csharpierrc.yml"
+CSS_STYLELINT_CONFIG_FILE: ".stylelintrc.yml"
+EDITORCONFIG_EDITORCONFIG_CHECKER_CONFIG_FILE: ".editorconfig-checker.json"
+HTML_HTMLHINT_CONFIG_FILE: ".htmlhintrc.json"
+JSON_JSONLINT_CONFIG_FILE: ".jsonlintrc.yml"
+JSON_PRETTIER_CONFIG_FILE: ".prettierrc.yml"
+MARKDOWN_MARKDOWN_LINK_CHECK_CONFIG_FILE: ".markdown-link-check.json"
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".markdownlint.yml"
+POWERSHELL_POWERSHELL_CONFIG_FILE: ".powershell-psscriptanalyzer.psd1"
+REPOSITORY_CHECKOV_CONFIG_FILE: ".checkov.yml"
+REPOSITORY_DEVSKIM_CONFIG_FILE: ".devskim.json"
+REPOSITORY_GITLEAKS_CONFIG_FILE: ".gitleaks.toml"
+REPOSITORY_GRYPE_CONFIG_FILE: ".grype.yml"
+REPOSITORY_KICS_CONFIG_FILE: ".kics.yml"
+REPOSITORY_SECRETLINT_CONFIG_FILE: ".secretlintrc.yml"
+REPOSITORY_TRIVY_CONFIG_FILE: ".trivy.yml"
+SPELL_CSPELL_CONFIG_FILE: ".cspell.config.yml"
+SPELL_LYCHEE_CONFIG_FILE: ".lychee.toml"
+SPELL_VALE_CONFIG_FILE: ".vale.ini"
+SQL_SQLFLUFF_CONFIG_FILE: ".sqlfluff"
+TERRAFORM_TFLINT_CONFIG_FILE: ".tflint.hcl"
+YAML_PRETTIER_CONFIG_FILE: ".prettierrc.yml"
+YAML_V8R_CONFIG_FILE: ".v8rrc.yml"
+YAML_YAMLLINT_CONFIG_FILE: ".yamllint.yml"

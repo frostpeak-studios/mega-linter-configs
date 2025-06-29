@@ -1,0 +1,29 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     filters.yml - Filter configuration for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/config-filtering/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# These filters are ignored by linters that run in 'project' mode.
+# In those cases, the linter needs its own .ignore file passed to it.
+# See: https://megalinter.io/8.8.0/config-cli-lint-mode/
+
+# Example: (test/|examples/)
+# FILTER_REGEX_EXCLUDE: none
+# Example: (src/)
+# FILTER_REGEX_INCLUDE: all
+
+# Excludes at any nested level, functionally the same as the **/directory/** glob pattern.
+EXCLUDED_DIRECTORIES:
+  - ".git"
+  - ".idea"
+  - ".vscode"
+  - "bin"
+  - "build"
+  - "megalinter-reports"
+  - "obj"
+  - "valestyles"
+
+# Leave this empty; it should be replaced by configs extending this one.
+ADDITIONAL_EXCLUDED_DIRECTORIES: []

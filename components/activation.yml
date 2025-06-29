@@ -1,0 +1,36 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     activation.yml - Activation/Deactivation settings for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/config-activation/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# We set ENABLE by descriptor, which enables all linters in that category by default.
+# We set DISABLE_LINTERS to disable specific linters only.
+# All linters are considered blocking.
+
+# General purpose/common linter types used across projects.
+ENABLE:
+  - ACTION
+  - API
+  - BASH
+  - COPYPASTE
+  - DOCKERFILE
+  - EDITORCONFIG
+  - ENV
+  - JSON
+  - MARKDOWN
+  - REPOSITORY
+  - SPELL
+  - YAML
+
+DISABLE_LINTERS:
+  # The vulnerability scanners are relatively slow, and there's not much upside to using both.
+  # It's possible to enable all of them, but it will significantly increase the run time.
+  # Choose between Trivy or Grype+Syft. We use Trivy by default.
+  - REPOSITORY_GRYPE
+  - REPOSITORY_SYFT
+  #- REPOSITORY_TRIVY
+  #- REPOSITORY_TRIVY_SBOM
+  # Vale is configured to use the proselint package, making this redundant.
+  - SPELL_PROSELINT

@@ -1,0 +1,15 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     dotnet.yml - Configuration for dotnet flavor of MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/flavors/dotnet/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/base.yml
+
+# Add linters for .NET projects.
+ENABLE:
+  - CSHARP
+  - POWERSHELL
+  - SQL
+  - XML

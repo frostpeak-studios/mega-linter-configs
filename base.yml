@@ -1,0 +1,23 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     base.yml - Base configuration for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/config-file/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# Use absolute URLs to remove ambiguity when extending remote configs that inherit from local configs.
+# This holds true in flavor configs as well when they extend this file.
+# See: https://github.com/oxsecurity/megalinter/issues/2371
+#      https://github.com/oxsecurity/megalinter/pull/2533
+EXTENDS:
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/activation.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/cli.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/configs.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/filters.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/logging.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/options.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/performance.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/plugins.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/reporters.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/scripts.yml
+  - https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/components/styles.yml

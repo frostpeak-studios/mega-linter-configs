@@ -1,0 +1,28 @@
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     .gitattributes - Enforce line endings and file tracking
+#     Docs: https://git-scm.com/docs/gitattributes
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# ── Line Endings ────────────────────────────────────────────────────────────
+
+# Default to LF
+* eol=lf
+
+# ── Default File Type Attributes ────────────────────────────────────────────
+
+# All file types
+* text=auto
+
+# Markups
+*.md   text=auto diff=markdown
+*.mdx  text=auto diff=markdown
+
+# Images
+*.png  binary
+*.jpg  binary
+*.gif  binary
+
+# Exclude git meta files from exporting
+.gitattributes export-ignore
+.gitignore     export-ignore
+.gitkeep       export-ignore

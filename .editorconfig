@@ -1,0 +1,117 @@
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     .editorconfig - Enforce consistent coding style and formatting.
+#     Docs: https://editorconfig.org/
+#
+#     This is a base config for universal languages/formats such as JSON, YAML, etc.
+#     For language/framework specific configs, see the editorconfig directory.
+#
+#     Some of the rules here are JetBrains-specific and require Rider or the
+#     ReSharper VS plugin. They are prefixed with either reshaper_ or ij_
+#     These should be gracefully ignored in VS/Code.
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# ── Global Settings ─────────────────────────────────────────────────────────
+
+# Top-most EditorConfig file.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+max_line_length = 120
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# IntelliJ configuration.
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = true
+ij_visual_guides = 120
+ij_smart_tabs = false
+ij_wrap_on_typing = false
+
+# ── Config Files (non-XML) ────────────────────────────────────────────────────
+
+[*.{yml,yaml,toml,json,ini,config,cfg,properties,editorconfig}]
+# Don't force wrapping, as it may break some attribute's values.
+max_line_length = off
+
+# Some of these commonly use 2 spaces, but we'll force
+# everything to 4 because it limits how much nesting
+# is comfortable to work with, which can help us
+# avoid some spaghetti or overly-complex designs.
+# Uncomment the line below if you wish to use 2 spaces.
+#indent_size = 2
+
+# EditorConfig
+ij_editorconfig_align_group_field_declarations = false
+ij_editorconfig_space_after_colon = false
+ij_editorconfig_space_after_comma = true
+ij_editorconfig_space_before_colon = false
+ij_editorconfig_space_before_comma = false
+ij_editorconfig_spaces_around_assignment_operators = true
+
+# Properties
+ij_properties_align_group_field_declarations = false
+ij_properties_keep_blank_lines = false
+ij_properties_key_value_delimiter = equals
+ij_properties_spaces_around_key_value_delimiter = false
+
+# TOML
+ij_toml_keep_indents_on_empty_lines = false
+
+# JSON
+ij_json_array_wrapping = split_into_lines
+ij_json_keep_blank_lines_in_code = 0
+ij_json_keep_indents_on_empty_lines = false
+ij_json_keep_line_breaks = true
+ij_json_keep_trailing_comma = false
+ij_json_object_wrapping = split_into_lines
+ij_json_property_alignment = do_not_align
+ij_json_space_after_colon = true
+ij_json_space_after_comma = true
+ij_json_space_before_colon = false
+ij_json_space_before_comma = false
+ij_json_spaces_within_braces = false
+ij_json_spaces_within_brackets = false
+ij_json_wrap_long_lines = false
+
+# YAML
+[*.{yml,yaml}]
+indent_size = 2
+
+ij_yaml_align_values_properties = do_not_align
+ij_yaml_autoinsert_sequence_marker = true
+ij_yaml_block_mapping_on_new_line = false
+ij_yaml_indent_sequence_value = true
+ij_yaml_keep_indents_on_empty_lines = false
+ij_yaml_keep_line_breaks = true
+ij_yaml_line_comment_add_space = false
+ij_yaml_line_comment_add_space_on_reformat = false
+ij_yaml_line_comment_at_first_column = true
+ij_yaml_sequence_on_new_line = false
+ij_yaml_space_before_colon = false
+ij_yaml_spaces_within_braces = true
+ij_yaml_spaces_within_brackets = true
+
+# ── Documentation ─────────────────────────────────────────────────────────────
+
+[{*.markdown,*.md}]
+ij_markdown_force_one_space_after_blockquote_symbol = true
+ij_markdown_force_one_space_after_header_symbol = true
+ij_markdown_force_one_space_after_list_bullet = true
+ij_markdown_force_one_space_between_words = true
+ij_markdown_format_tables = true
+ij_markdown_insert_quote_arrows_on_wrap = true
+ij_markdown_keep_indents_on_empty_lines = false
+ij_markdown_keep_line_breaks_inside_text_blocks = true
+ij_markdown_max_lines_around_block_elements = 1
+ij_markdown_max_lines_around_header = 1
+ij_markdown_max_lines_between_paragraphs = 1
+ij_markdown_min_lines_around_block_elements = 1
+ij_markdown_min_lines_around_header = 1
+ij_markdown_min_lines_between_paragraphs = 1
+ij_markdown_wrap_text_if_long = true
+ij_markdown_wrap_text_inside_blockquotes = true

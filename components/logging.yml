@@ -1,0 +1,20 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     logging.yml - Logging settings for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/config-variables/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+LOG_LEVEL: INFO
+
+# Only written to if TEXT_REPORTER is set to true.
+LOG_FILE: mega-linter.log
+
+# Cool, but noisy.
+PRINT_ALPACA: false
+
+# Useful for debugging filtering issues, but noisy.
+PRINT_ALL_FILES: false
+
+# Ensure this is added to .gitignore.
+# REPORT_OUTPUT_FOLDER: ${GITHUB_WORKSPACE}/megalinter-reports
