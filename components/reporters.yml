@@ -63,9 +63,11 @@ FILEIO_REPORTER: false
 # See: https://megalinter.io/8.8.0/reporters/TextReporter/#configuration
 TEXT_REPORTER: false
 
+# cspell:disable
 # SARIF file reporting. Not all linters are compatible with this.
 # See: https://megalinter.io/8.8.0/reporters/SarifReporter/#configuration
 SARIF_REPORTER: false
+# cspell:enable
 
 # Posts a pack of files that contains the source files fixed by linters.
 # See: https://megalinter.io/8.8.0/reporters/UpdatedSourcesReporter/#configuration
