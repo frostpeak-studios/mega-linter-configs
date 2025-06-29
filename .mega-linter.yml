@@ -1,0 +1,10 @@
+---
+#  ╭──────────────────────────────────────────────────────────────────────────────╮
+#     .mega-linter.yml - Configuration for MegaLinter
+#     Docs:
+#     https://megalinter.io/latest/config-file/
+#  ╰──────────────────────────────────────────────────────────────────────────────╯
+
+EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/base.yml
+
+LINTER_RULES_PATH: .config/linters/resources
