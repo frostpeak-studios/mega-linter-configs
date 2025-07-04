@@ -45,17 +45,23 @@ MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore-path .config/linters/resources/.markd
 REPOSITORY_SECRETLINT_ARGUMENTS: "--secretlintignore .config/linters/resources/.secretlintignore"
 YAML_PRETTIER_ARGUMENTS: "--ignore-path .config/linters/resources/.prettierignore"
 
-# CSpell will find lots of issues.
+# CSpell tends to find lots of issues in new projects, and we don't
+# want to fail just because something hasn't been added to a dictionary yet.
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 SPELL_CSPELL_DISABLE_ERRORS: true
+
+# As of v1.0.2 v8r was failing with a false positive in .mega-linter.yml
+# where it thinks API_REPORTER and SKIP_LINTER_OUTPUT_SANITIZATION are invalid
+# in the schema, despite them being very much valid in v8.8.0.
+# Possibly due to an outdated or incorrect version schema in the schema store.
+YAML_V8R_DISABLE_ERRORS: true
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Set the base path in the config repo.
-# Use this path for CI workflows. It will download the latest linter configs to the project root.
-LINTER_RULES_PATH: https://raw.githubusercontent.com/frostpeak-studios/linter-configs/refs/heads/main/resources
-# Use this path for local runs when you have the linter configs repo added as a submodule.
-# LINTER_RULES_PATH: .config/linters/resources
+# This assumes the linter configs have been included in the project as a submodule.
+# Override this if your path differs from the default.
+LINTER_RULES_PATH: .config/linters/resources
 
 # Explicitly define config file paths. The linter would otherwise detect some of these
 # properly, but others use a different naming convention or file format than the default.
@@ -191,10 +197,6 @@ SHOW_SKIPPED_LINTERS: true
 # Will significantly degrade performance.
 PARALLEL: true
 
-# When left unset will use all available cores.
-# Leave commented out unless you need to restrict the resources available to the runner.
-#PARALLEL_PROCESS_NUMBER: 4
-
 # Can be turned on in private repos to improve performance, but will output
 # any secrets found in plain text to the console/log.
 SKIP_LINTER_OUTPUT_SANITIZATION: false
@@ -202,6 +204,10 @@ SKIP_LINTER_OUTPUT_SANITIZATION: false
 # Should be set to false after the codebase has been scanned and all issues fixed.
 # This will switch to only scanning new/changed files and can dramatically improve performance.
 VALIDATE_ALL_CODEBASE: true
+
+# When left unset will use all available cores.
+# Leave commented out unless you need to restrict the resources available to the runner.
+# PARALLEL_PROCESS_NUMBER: 4
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Plugins ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -289,9 +295,9 @@ MARKDOWN_SUMMARY_REPORTER: false
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-PRE_COMMANDS:
+PRE_COMMANDS: []
 
-POST_COMMANDS:
+POST_COMMANDS: []
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
