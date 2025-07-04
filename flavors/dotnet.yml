@@ -5,7 +5,7 @@
 #     https://megalinter.io/latest/flavors/dotnet/
 #  ╰──────────────────────────────────────────────────────────────────────────────╯
 
-EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/flavors/base.yml
+EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/.mega-linter.yml
 
 # Add linters for .NET projects.
 ENABLE:

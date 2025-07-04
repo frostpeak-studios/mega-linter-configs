@@ -5,6 +5,304 @@
 #     https://megalinter.io/latest/config-file/
 #  ╰──────────────────────────────────────────────────────────────────────────────╯
 
-EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/base.yml
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━ Activation/Deactivation ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-LINTER_RULES_PATH: .config/linters/resources
+# We set ENABLE by descriptor, which enables all linters in that category by default.
+# We set DISABLE_LINTERS to disable specific linters only.
+# All linters are considered blocking.
+
+# General purpose/common linter types used across projects.
+ENABLE:
+  - ACTION
+  - API
+  - BASH
+  - COPYPASTE
+  - DOCKERFILE
+  - EDITORCONFIG
+  - ENV
+  - JSON
+  - MARKDOWN
+  - REPOSITORY
+  - SPELL
+  - YAML
+
+DISABLE_LINTERS:
+  # The vulnerability scanners are relatively slow, and there's not much upside to using both.
+  # It's possible to enable all of them, but it will significantly increase the run time.
+  # Choose between Trivy or Grype+Syft. We use Trivy by default.
+  - REPOSITORY_GRYPE
+  - REPOSITORY_SYFT
+  # - REPOSITORY_TRIVY
+  # - REPOSITORY_TRIVY_SBOM
+  # Vale is configured to use the proselint package, making this redundant.
+  - SPELL_PROSELINT
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CLI Arguments ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Explicitly pass .ignore file paths to linters that don't detect them outside the project root.
+JSON_PRETTIER_ARGUMENTS: "--ignore-path .config/linters/resources/.prettierignore"
+MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore-path .config/linters/resources/.markdownlintignore"
+REPOSITORY_SECRETLINT_ARGUMENTS: "--secretlintignore .config/linters/resources/.secretlintignore"
+YAML_PRETTIER_ARGUMENTS: "--ignore-path .config/linters/resources/.prettierignore"
+
+# CSpell will find lots of issues.
+SPELL_CSPELL_ANALYZE_FILE_NAMES: false
+SPELL_CSPELL_DISABLE_ERRORS: true
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Config Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Set the base path in the config repo.
+# Use this path for CI workflows. It will download the latest linter configs to the project root.
+LINTER_RULES_PATH: https://raw.githubusercontent.com/frostpeak-studios/linter-configs/refs/heads/main/resources
+# Use this path for local runs when you have the linter configs repo added as a submodule.
+# LINTER_RULES_PATH: .config/linters/resources
+
+# Explicitly define config file paths. The linter would otherwise detect some of these
+# properly, but others use a different naming convention or file format than the default.
+# We set them all to avoid having to figure out which category each of these falls into.
+
+# cspell:disable
+ACTION_ACTIONLINT_CONFIG_FILE: ".actionlint.yml"
+API_SPECTRAL_CONFIG_FILE: ".spectral.yml"
+COPYPASTE_JSCPD_CONFIG_FILE: ".jscpd.json"
+CPP_CLANG_FORMAT_CONFIG_FILE: ".clang-format"
+CSHARP_CSHARPIER_CONFIG_FILE: ".csharpierrc.yml"
+CSS_STYLELINT_CONFIG_FILE: ".stylelintrc.yml"
+EDITORCONFIG_EDITORCONFIG_CHECKER_CONFIG_FILE: ".editorconfig-checker.json"
+HTML_HTMLHINT_CONFIG_FILE: ".htmlhintrc.json"
+JSON_JSONLINT_CONFIG_FILE: ".jsonlintrc.yml"
+JSON_PRETTIER_CONFIG_FILE: ".prettierrc.yml"
+MARKDOWN_MARKDOWN_LINK_CHECK_CONFIG_FILE: ".markdown-link-check.json"
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".markdownlint.yml"
+POWERSHELL_POWERSHELL_CONFIG_FILE: ".powershell-psscriptanalyzer.psd1"
+REPOSITORY_CHECKOV_CONFIG_FILE: ".checkov.yml"
+REPOSITORY_DEVSKIM_CONFIG_FILE: ".devskim.json"
+REPOSITORY_GITLEAKS_CONFIG_FILE: ".gitleaks.toml"
+REPOSITORY_GRYPE_CONFIG_FILE: ".grype.yml"
+REPOSITORY_KICS_CONFIG_FILE: ".kics.yml"
+REPOSITORY_SECRETLINT_CONFIG_FILE: ".secretlintrc.yml"
+REPOSITORY_TRIVY_CONFIG_FILE: ".trivy.yml"
+SPELL_CSPELL_CONFIG_FILE: ".cspell.config.yml"
+SPELL_LYCHEE_CONFIG_FILE: ".lychee.toml"
+SPELL_VALE_CONFIG_FILE: ".vale.ini"
+SQL_SQLFLUFF_CONFIG_FILE: ".sqlfluff"
+TERRAFORM_TFLINT_CONFIG_FILE: ".tflint.hcl"
+YAML_PRETTIER_CONFIG_FILE: ".prettierrc.yml"
+YAML_V8R_CONFIG_FILE: ".v8rrc.yml"
+YAML_YAMLLINT_CONFIG_FILE: ".yamllint.yml"
+# cspell:enable
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Filters ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# These filters are ignored by linters that run in 'project' mode.
+# In those cases, the linter needs its own .ignore file passed to it.
+# See: https://megalinter.io/8.8.0/config-cli-lint-mode/
+
+# Example: (test/|examples/)
+# FILTER_REGEX_EXCLUDE: none
+# Example: (src/)
+# FILTER_REGEX_INCLUDE: all
+
+# Excludes at any nested level, functionally the same as the **/directory/** glob pattern.
+EXCLUDED_DIRECTORIES:
+  - ".git"
+  - ".idea"
+  - ".vscode"
+  - "bin"
+  - "build"
+  - "megalinter-reports"
+  - "obj"
+  - "valestyles"
+
+# Leave this empty; it should be replaced by configs extending this one.
+ADDITIONAL_EXCLUDED_DIRECTORIES: []
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LOG_LEVEL: INFO
+
+# Only written to if TEXT_REPORTER is set to true.
+LOG_FILE: mega-linter.log
+
+# Cool, but noisy.
+PRINT_ALPACA: false
+
+# Ensure this is added to .gitignore.
+# REPORT_OUTPUT_FOLDER: ${GITHUB_WORKSPACE}/megalinter-reports
+
+# Useful for debugging filtering issues, but noisy.
+PRINT_ALL_FILES: false
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Leave unset unless you want to change it.
+# DEFAULT_WORKSPACE: /tmp/lint
+
+# We handle fixes manually. Enabling this requires some other config changes.
+# See: https://megalinter.io/8.8.0/config-apply-fixes/
+APPLY_FIXES: none
+
+# Only relevant on local runs or self-hosted runners with persistence.
+CLEAR_REPORT_FOLDER: false
+
+# Use to append properties instead of replacing them when using EXTENDS.
+CONFIG_PROPERTIES_TO_APPEND:
+  - ENABLE
+  - DISABLE_LINTERS
+  - PLUGINS
+  - PRE_COMMANDS
+  - POST_COMMANDS
+
+# Run all lint modes by default.
+# See: https://megalinter.io/8.8.0/config-cli-lint-mode/
+# SKIP_CLI_LINT_MODES: []
+
+# Enable to force-pass checks. Can be useful if something upstream breaks, and we have to wait for a fix.
+DISABLE_ERRORS: false
+
+# Not ideal to skip linter(s), but also not worth blocking a PR.
+FAIL_IF_MISSING_LINTER_IN_FLAVOR: false
+
+# Enable to force-fail if any linter applies auto-fixes. Only applies if APPLY_FIXES is enabled.
+FAIL_IF_UPDATED_SOURCES: false
+
+# New ones get added periodically, and we always want to use the smallest image possible.
+FLAVOR_SUGGESTIONS: true
+
+# Formatter errors are treated as warnings.
+FORMATTERS_DISABLE_ERRORS: true
+
+# Only applies to @generated marked files.
+IGNORE_GENERATED_FILES: true
+
+# Adds the contents of .gitignore to linter exclusions.
+IGNORE_GITIGNORED_FILES: true
+
+# Nice to know how long each linter takes, useful when trying to optimize runs.
+SHOW_ELAPSED_TIME: true
+
+# Not necessary, but doesn't hurt to log.
+SHOW_SKIPPED_LINTERS: true
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Performance ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# MegaLinter groups the same language / format linters on the same process to avoid locking
+# issues if applying fixes. If that doesn't work as intended, disable this.
+# Will significantly degrade performance.
+PARALLEL: true
+
+# When left unset will use all available cores.
+# Leave commented out unless you need to restrict the resources available to the runner.
+#PARALLEL_PROCESS_NUMBER: 4
+
+# Can be turned on in private repos to improve performance, but will output
+# any secrets found in plain text to the console/log.
+SKIP_LINTER_OUTPUT_SANITIZATION: false
+
+# Should be set to false after the codebase has been scanned and all issues fixed.
+# This will switch to only scanning new/changed files and can dramatically improve performance.
+VALIDATE_ALL_CODEBASE: true
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Plugins ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PLUGINS: []
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Reporters ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# By default, we only enabled 3 reporters. Console, GitHub PR (comment) and GitHub Status.
+# Everything else is disabled to avoid generating artifacts and logs we don't need.
+# If the project is on a different VCS, be sure to enable its reporter and configure its access/permissions.
+# Each report has its own configuration, links for each of them are included in the comments below.
+
+# Standard console logging.
+# See: https://megalinter.io/8.8.0/reporters/ConsoleReporter/#configuration
+CONSOLE_REPORTER: true
+
+# ── Version Control ───────────────────────────────────────────────────────────
+
+# Requires jobs.<job_id>.permissions [pull-requests: write].
+# See: https://megalinter.io/8.8.0/reporters/GitHubCommentReporter/#configuration
+GITHUB_COMMENT_REPORTER: true
+
+# Requires jobs.<job_id>.permissions [pull-requests: write].
+# See: https://megalinter.io/8.8.0/reporters/GitHubStatusReporter/#configuration
+GITHUB_STATUS_REPORTER: true
+
+# Requires vars set in the runner's container, a build policy, and
+# Build Service permissions [Contribute, Contribute to Pull Requests].
+# See: https://megalinter.io/8.8.0/reporters/AzureCommentReporter/#configuration
+AZURE_COMMENT_REPORTER: false
+
+# Requires access token with scope [api]
+# See: https://megalinter.io/8.8.0/reporters/GitlabCommentReporter/#configuration
+GITLAB_COMMENT_REPORTER: false
+
+# Requires access token with scope [Pull-requests: Write]
+# See: https://megalinter.io/8.8.0/reporters/BitbucketCommentReporter/#configuration
+BITBUCKET_COMMENT_REPORTER: false
+
+# ── Services | External ───────────────────────────────────────────────────────
+
+# API/Grafana reporter.
+# See: https://megalinter.io/8.8.0/reporters/ApiReporter/#all-configuration-variables
+API_REPORTER: false
+
+# Emails the reports and artifacts.
+# See: https://megalinter.io/8.8.0/reporters/EmailReporter/#configuration
+EMAIL_REPORTER: false
+
+# Uploads the reports and artifacts to file.io.
+# See: https://megalinter.io/8.8.0/reporters/FileIoReporter/#configuration
+FILEIO_REPORTER: false
+
+# ── Files | Artifacts ─────────────────────────────────────────────────────────
+
+# Standard text logging.
+# See: https://megalinter.io/8.8.0/reporters/TextReporter/#configuration
+TEXT_REPORTER: false
+
+# cspell:disable
+# SARIF file reporting. Not all linters are compatible with this.
+# See: https://megalinter.io/8.8.0/reporters/SarifReporter/#configuration
+SARIF_REPORTER: false
+# cspell:enable
+
+# Posts a pack of files that contains the source files fixed by linters.
+# See: https://megalinter.io/8.8.0/reporters/UpdatedSourcesReporter/#configuration
+UPDATED_SOURCES_REPORTER: false
+
+# Generates an IDE config folder with extensions for linters used.
+# See: https://megalinter.io/8.8.0/reporters/ConfigReporter/#configuration
+CONFIG_REPORTER: false
+
+# Generates a pack of TAP logs.
+# See: https://megalinter.io/8.8.0/reporters/TapReporter/#configuration
+TAP_REPORTER: false
+
+# Generates an execution log in JSON format.
+# See: https://megalinter.io/8.8.0/reporters/JsonReporter/#configuration
+JSON_REPORTER: false
+
+# Generates SAST results in Markdown.
+# See: https://megalinter.io/8.8.0/reporters/MarkdownSummaryReporter/#configuration
+MARKDOWN_SUMMARY_REPORTER: false
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PRE_COMMANDS:
+
+POST_COMMANDS:
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Options: standard, prettier
+JAVASCRIPT_DEFAULT_STYLE: standard
+
+# Options: markdownlint, remark-lint
+MARKDOWN_DEFAULT_STYLE: markdownlint
+
+# Options: black, ruff
+PYTHON_DEFAULT_STYLE: black
+
+# Options: standard, prettier
+TYPESCRIPT_DEFAULT_STYLE: standard

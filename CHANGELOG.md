@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.2] - 2025-07-04
+
+### Changed
+
+- Combined components into single config
+
+### Fixed
+
+- Issues with multiple inheritance of config values
+
 ## [1.0.1] - 2025-06-29
 
 ### Added
