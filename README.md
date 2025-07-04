@@ -55,9 +55,11 @@ The configuration defines the `LINTER_RULES_PATH` and file names for our custom 
 exist in the [linter-configs repo](https://github.com/frostpeak-studios/linter-configs). You can override these or
 remove them from the configuration to use your own configs.
 
-By default, the `mega-linter-runner` will download all of these configs to the root of your project, which may not
-be the desired behavior when running locally rather than in a CI/CD container. To avoid this, you can include the
-`linter-configs` repo as a submodule in your project and point the `LINTER_RULES_PATH` to it.
+The most reliable method of including the linter configs in your pipeline is to add the `linter-configs` repo
+as a submodule. This allows you to easily update the configs or pin to a specific version, if you wish. Alternatively,
+you can point `LINTER_RULES_PATH` to the repo and it will download them at runtime into the project's root, however
+this method does not support downloading the CSpell `dictionaries` or `valestyles` subdirectories, which causes both of
+these linters to fail.
 
 ```sh
 git submodule add https://github.com/frostpeak-studios/linter-configs .config/linters
