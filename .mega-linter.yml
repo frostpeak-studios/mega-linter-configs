@@ -299,6 +299,25 @@ PRE_COMMANDS: []
 
 POST_COMMANDS: []
 
+# Install prettier plugins globally, as not every project uses npm.
+JAVASCRIPT_PRETTIER_PRE_COMMANDS:
+  - command: "npm i -g prettier-plugin-multiline-arrays"
+    continue_if_failed: true
+    run_before_linters: true
+    cwd: workspace
+
+JSON_PRETTIER_PRE_COMMANDS:
+  - command: "npm i -g prettier-plugin-multiline-arrays"
+    continue_if_failed: true
+    run_before_linters: true
+    cwd: workspace
+
+YAML_PRETTIER_PRE_COMMANDS:
+  - command: "npm i -g prettier-plugin-multiline-arrays"
+    continue_if_failed: true
+    run_before_linters: true
+    cwd: workspace
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Options: standard, prettier
