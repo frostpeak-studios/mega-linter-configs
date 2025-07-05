@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.3] - 2025-07-05
+
+### Added
+
+- Prettier plugin: multiline-arrays
+
+### Fixed
+
+- `ENABLE` linters list not appended in flavor configs
+
+### Changed
+
+- Updated linter configs package to v1.0.7
+
 ## [1.0.2] - 2025-07-04
 
 ### Changed

@@ -7,9 +7,36 @@
 
 EXTENDS: https://raw.githubusercontent.com/frostpeak-studios/mega-linter-configs/refs/heads/main/.mega-linter.yml
 
-# Add linters for .NET projects.
 ENABLE:
+  # General purpose/common linter types used across projects.
+  - ACTION
+  - API
+  - BASH
+  - COPYPASTE
+  - DOCKERFILE
+  - EDITORCONFIG
+  - ENV
+  - JSON
+  - MARKDOWN
+  - REPOSITORY
+  - SPELL
+  - YAML
+  # Linters for .NET projects.
   - CSHARP
   - POWERSHELL
   - SQL
   - XML
+
+DISABLE_LINTERS:
+  # The vulnerability scanners are relatively slow, and there's not much upside to using both.
+  # It's possible to enable all of them, but it will significantly increase the run time.
+  # Choose between Trivy or Grype+Syft. We use Trivy by default.
+  - REPOSITORY_GRYPE
+  - REPOSITORY_SYFT
+  # - REPOSITORY_TRIVY
+  # - REPOSITORY_TRIVY_SBOM
+  # Vale is configured to use the proselint package, making this redundant.
+  - SPELL_PROSELINT
+  # This fails in the runner with System.IO.FileNotFoundException: 'System.Composition.AttributedModel'
+  # and I still can't find a fix for it. We'll just run in manually in the workflow.
+  - CSHARP_ROSLYNATOR
